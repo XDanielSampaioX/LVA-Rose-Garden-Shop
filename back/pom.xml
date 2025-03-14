@@ -8,10 +8,10 @@
 		<version>3.4.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.LVA-Rose-Garden-Shop</groupId>
-	<artifactId>LVA-Rose-Garden-Shop</artifactId>
+	<groupId>com.back</groupId>
+	<artifactId>back</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>LVA-Rose-Garden-Shop</name>
+	<name>back</name>
 	<description>Criando uma loja para venda de Rosas do deserto</description>
 	<url/>
 	<licenses>
@@ -53,6 +53,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>7.0.0.Final</version> <!-- ou a versão mais recente disponível -->
 		</dependency>
 	</dependencies>
 
