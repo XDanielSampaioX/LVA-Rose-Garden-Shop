@@ -1,29 +1,30 @@
 package com.LVA_Rose_Garden_Shop.domain.produto;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Produto")
-@Table(name = "Produto")
-public class ProdutoEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ProdutoForm {
+
+    @NotBlank(message = "O campo nome é obrigatório")
     private String nome;
+
     private String descricao;
+
+    @NotBlank(message = "O campo preço é obrigatório")
     private BigDecimal preco;
+
     private String categoria;
     private Long estoque;
-
-    @Column(name = "data_lancamento")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
     private OffsetDateTime dataLancamento;
+
 }
