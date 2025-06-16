@@ -5,21 +5,14 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity(name = "pedido")
-@Table(name = "pedido")
+@Entity(name = "Pedido")
+@Table(name = "Pedido")
 public class PedidoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(name = "idusuario")
     private int idUsuario;
-
-    @Column(name = "datapedido")
     private LocalDateTime dataPedido;
-
-    @Column(name = "totalpedido")
     private BigDecimal totalPedido;
-
     private String status;
 }
