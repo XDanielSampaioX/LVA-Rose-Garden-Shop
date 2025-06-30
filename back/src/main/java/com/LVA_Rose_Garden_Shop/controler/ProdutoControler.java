@@ -11,11 +11,13 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.net.URI;
 
 @RestController
 @RequestMapping("/produtos")
 
+@CrossOrigin(origins = "http://localhost:3000") // 👈 Permite requisições do seu frontend (Next.js)
 @Data
 @AllArgsConstructor
 public class ProdutoControler {
@@ -23,8 +25,13 @@ public class ProdutoControler {
     private final ProdutoService produtoService;
 
     @GetMapping("/listar")
-    public ResponseEntity<Page<ProdutoDto>> listarProdutos(@PageableDefault(page = 0, size = 10) Pageable pageable) {
-        return ResponseEntity.ok(produtoService.listarProdutos(pageable));
+    public ResponseEntity<Page<ProdutoDto>> listarProdutos(@PageableDefault(page = 0, size = 10) Pageable pageable,
+                                                           @RequestParam(required = false) String nome,
+                                                           @RequestParam(required = false) String descricao,
+                                                           @RequestParam(required = false) BigDecimal preco,
+                                                           @RequestParam(required = false) String categoria,
+                                                           @RequestParam(required = false) Long estoque){
+        return ResponseEntity.ok(produtoService.listarProdutos(pageable, nome, descricao, preco, categoria, estoque));
     }
 
 
