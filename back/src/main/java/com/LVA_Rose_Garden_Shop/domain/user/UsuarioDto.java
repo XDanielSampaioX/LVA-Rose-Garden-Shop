@@ -1,14 +1,9 @@
-package com.LVA_Rose_Garden_Shop.domain.usuario;
+package com.LVA_Rose_Garden_Shop.domain.user;
 
-import jakarta.persistence.*;
+import lombok.Data;
 
-import java.time.LocalDateTime;
-
-@Entity(name = "Usuario")
-@Table(name = "Usuario")
-public class UsuarioEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Data
+public class UsuarioDto {
     private Long id;
     private String nomeCompleto;
     private String cpf;
@@ -25,4 +20,5 @@ public class UsuarioEntity {
     private String celular;
     private String telefone;
     private String email;
+    private String password;
 }

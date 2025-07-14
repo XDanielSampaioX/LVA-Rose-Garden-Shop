@@ -3,7 +3,6 @@ package com.LVA_Rose_Garden_Shop.domain.itemPedido;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Entity(name = "ItemPedido")
 @Table(name = "ItemPedido")

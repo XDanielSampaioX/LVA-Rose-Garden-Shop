@@ -1,8 +1,6 @@
 package com.LVA_Rose_Garden_Shop.domain.pedido;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 

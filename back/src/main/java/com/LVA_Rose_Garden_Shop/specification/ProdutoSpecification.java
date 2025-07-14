@@ -1,6 +1,6 @@
 package com.LVA_Rose_Garden_Shop.specification;
 
-import com.LVA_Rose_Garden_Shop.domain.produto.ProdutoEntity;
+import com.LVA_Rose_Garden_Shop.domain.product.ProdutoEntity;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -21,16 +21,16 @@ public class ProdutoSpecification {
             Predicate predicate = builder.conjunction();
 
             if (!StringUtils.isEmpty(nome)) {
-                predicate = builder.and(predicate, builder.like(root.get("nome"), "%" + nome + "%"));
+                predicate = builder.and(predicate, builder.like(root.get("nome"), "%" + nome.toLowerCase() + "%"));
             }
             if (!StringUtils.isEmpty(descricao)) {
-                predicate = builder.and(predicate, builder.like(root.get("descricao"), "%" + descricao + "%"));
+                predicate = builder.and(predicate, builder.like(root.get("descricao"), "%" + descricao.toLowerCase() + "%"));
             }
             if (Objects.nonNull(preco)) {
                 predicate = builder.and(predicate, builder.equal(root.get("preco"), preco));
             }
             if (!StringUtils.isEmpty(categoria)) {
-                predicate = builder.and(predicate, builder.like(root.get("categoria"), "%" + categoria + "%"));
+                predicate = builder.and(predicate, builder.like(root.get("categoria"), "%" + categoria.toLowerCase() + "%"));
             }
             if (Objects.nonNull(estoque)) {
                 predicate = builder.and(predicate, builder.equal(root.get("estoque"), estoque));

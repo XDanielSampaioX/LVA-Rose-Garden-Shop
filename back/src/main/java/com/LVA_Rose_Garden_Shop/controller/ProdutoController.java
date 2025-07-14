@@ -1,8 +1,9 @@
-package com.LVA_Rose_Garden_Shop.controler;
+package com.LVA_Rose_Garden_Shop.controller;
 
-import com.LVA_Rose_Garden_Shop.domain.produto.ProdutoDto;
-import com.LVA_Rose_Garden_Shop.domain.produto.ProdutoForm;
+import com.LVA_Rose_Garden_Shop.domain.product.ProdutoDto;
+import com.LVA_Rose_Garden_Shop.domain.product.ProdutoForm;
 import com.LVA_Rose_Garden_Shop.service.ProdutoService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.domain.Page;
@@ -20,7 +21,7 @@ import java.net.URI;
 @CrossOrigin(origins = "http://localhost:3000") // 👈 Permite requisições do seu frontend (Next.js)
 @Data
 @AllArgsConstructor
-public class ProdutoControler {
+public class ProdutoController {
 
     private final ProdutoService produtoService;
 
@@ -30,8 +31,15 @@ public class ProdutoControler {
                                                            @RequestParam(required = false) String descricao,
                                                            @RequestParam(required = false) BigDecimal preco,
                                                            @RequestParam(required = false) String categoria,
-                                                           @RequestParam(required = false) Long estoque){
-        return ResponseEntity.ok(produtoService.listarProdutos(pageable, nome, descricao, preco, categoria, estoque));
+                                                           @RequestParam(required = false) Long estoque) {
+
+        Page<ProdutoDto> produto = produtoService.listarProdutos(pageable, nome, descricao, preco, categoria, estoque);
+
+        if (produto.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(produto);
     }
 
 
@@ -41,8 +49,7 @@ public class ProdutoControler {
     }
 
     @PostMapping
-    public ResponseEntity<ProdutoDto> criarProduto(@RequestBody ProdutoForm produto) {
-
+    public ResponseEntity<ProdutoDto> criarProduto(@RequestBody @Valid ProdutoForm produto) {
 
         ProdutoDto produtoSalvo = produtoService.criarProduto(produto);
 
@@ -52,7 +59,7 @@ public class ProdutoControler {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProdutoDto> editarProduto(@RequestBody ProdutoForm produto, @PathVariable Long id) {
+    public ResponseEntity<ProdutoDto> editarProduto(@RequestBody @Valid ProdutoForm produto, @PathVariable Long id) {
         ProdutoDto produtoSalvo = produtoService.editarProduto(produto, id);
 
         URI location = URI.create("/produtos/" + produtoSalvo.getId());

@@ -1,4 +1,4 @@
-package com.LVA_Rose_Garden_Shop.domain.produto;
+package com.LVA_Rose_Garden_Shop.domain.product;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
