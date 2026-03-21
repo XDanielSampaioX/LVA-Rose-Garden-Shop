@@ -1,6 +1,6 @@
 package com.LVA_Rose_Garden_Shop.service;
 
-import com.LVA_Rose_Garden_Shop.domain.product.ProdutoDto;
+import com.LVA_Rose_Garden_Shop.dto.product.ProdutoDto;
 import com.LVA_Rose_Garden_Shop.domain.product.ProdutoEntity;
 import com.LVA_Rose_Garden_Shop.domain.product.ProdutoForm;
 import com.LVA_Rose_Garden_Shop.mapper.ProdutoMapper;
@@ -9,7 +9,6 @@ import com.LVA_Rose_Garden_Shop.specification.ProdutoSpecification;
 import com.LVA_Rose_Garden_Shop.validator.ProdutoValidator;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,7 +34,7 @@ public class ProdutoService {
 
         Function<ProdutoEntity, ProdutoDto> preencherDto = produtoMapper::toDto;
 
-        if (ObjectUtils.allNull(nome, descricao, preco, categoria, estoque)) {
+        if (nome == null && descricao == null && preco == null && categoria == null && estoque == null) {
             return produtoRepository.findAll(pageable)
                     .map(preencherDto);
         } else {
@@ -49,16 +48,27 @@ public class ProdutoService {
     }
 
     public ProdutoDto criarProduto(ProdutoForm produto) {
-        ProdutoEntity produtoParaSalvar = produtoRepository.saveAndFlush(produtoMapper.toEntity(produto));
+        ProdutoEntity produtoParaSalvar = ProdutoEntity.criarCadastro(produto);
+        produtoRepository.saveAndFlush(produtoParaSalvar);
 
         return produtoMapper.toDto(produtoParaSalvar);
     }
 
     public ProdutoDto editarProduto(ProdutoForm produto, Long id) {
-        produtoValidator.verificarExistencia(id);
-
-        ProdutoEntity produtoParaSalvar = produtoMapper.toEntity(produto);
-        produtoParaSalvar.setId(id);
+        ProdutoEntity produtoParaSalvar = produtoValidator.buscarEntidadePorId(id);
+        ProdutoEntity produtoEditado = ProdutoEntity.criarCadastro(produto);
+        produtoParaSalvar.atualizarDados(
+                produtoEditado.getNome(),
+                produtoEditado.getDescricao(),
+                produtoEditado.getPreco(),
+                produtoEditado.getCategoria(),
+                produtoEditado.getEstoque(),
+                produtoEditado.getImagemBase64(),
+                produtoEditado.getImagemMimeType(),
+                produtoEditado.getImagemHash(),
+                produtoEditado.getFonteReferencia(),
+                produtoEditado.getDataLancamento()
+        );
         produtoRepository.saveAndFlush(produtoParaSalvar);
 
         return produtoMapper.toDto(produtoParaSalvar);

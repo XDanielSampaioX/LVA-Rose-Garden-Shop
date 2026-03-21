@@ -1,6 +1,6 @@
 package com.LVA_Rose_Garden_Shop.controller;
 
-import com.LVA_Rose_Garden_Shop.domain.product.ProdutoDto;
+import com.LVA_Rose_Garden_Shop.dto.product.ProdutoDto;
 import com.LVA_Rose_Garden_Shop.domain.product.ProdutoForm;
 import com.LVA_Rose_Garden_Shop.service.ProdutoService;
 import jakarta.validation.Valid;

@@ -1,8 +1,8 @@
 package com.LVA_Rose_Garden_Shop.service.auth;
 
-import com.LVA_Rose_Garden_Shop.domain.auth.AutenticacaoDto;
+import com.LVA_Rose_Garden_Shop.dto.auth.AutenticacaoDto;
 import com.LVA_Rose_Garden_Shop.domain.auth.AutenticacaoForm;
-import com.LVA_Rose_Garden_Shop.domain.user.UsuarioDto;
+import com.LVA_Rose_Garden_Shop.dto.user.UsuarioDto;
 import com.LVA_Rose_Garden_Shop.domain.user.UsuarioEntity;
 import com.LVA_Rose_Garden_Shop.mapper.UsuarioMapper;
 import com.LVA_Rose_Garden_Shop.security.JwtService;
@@ -28,6 +28,9 @@ public class AutenticacaoService {
 
         String token = jwtService.gerarToken(usuarioEntity);
 
-        return new AutenticacaoDto(token, usuarioMapper.toDto(usuarioEntity));
+        return AutenticacaoDto.builder()
+                .token(token)
+                .usuario(usuarioMapper.toDto(usuarioEntity))
+                .build();
     }
 }

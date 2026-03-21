@@ -27,6 +27,10 @@ public class ProdutoForm {
 
     private String categoria;
     private Long estoque;
+    private String imagemBase64;
+    private String imagemMimeType;
+    private String imagemHash;
+    private String fonteReferencia;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
     private OffsetDateTime dataLancamento;
 

@@ -1,6 +1,6 @@
 package com.LVA_Rose_Garden_Shop.validator;
 
-import com.LVA_Rose_Garden_Shop.domain.user.UsuarioDto;
+import com.LVA_Rose_Garden_Shop.dto.user.UsuarioDto;
 import com.LVA_Rose_Garden_Shop.domain.user.UsuarioEntity;
 import com.LVA_Rose_Garden_Shop.mapper.UsuarioMapper;
 import com.LVA_Rose_Garden_Shop.repository.UsuarioRepository;
@@ -27,10 +27,19 @@ public class UsuarioValidator {
     }
 
     public UsuarioDto verificarExistenciaPorEmail(String email) {
-        UsuarioEntity usuarioEntity = usuarioRepository.findByEmail(email)
+        UsuarioEntity usuarioEntity = buscarEntidadePorEmail(email);
+        return usuarioMapper.toDto(usuarioEntity);
+    }
+
+    public UsuarioEntity buscarEntidadePorId(Long id) {
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Usuário não encontrado com o ID: " + id));
+    }
+
+    public UsuarioEntity buscarEntidadePorEmail(String email) {
+        return usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Usuário não encontrado com o e-mail: " + email));
-
-        return usuarioMapper.toDto(usuarioEntity);
     }
 }

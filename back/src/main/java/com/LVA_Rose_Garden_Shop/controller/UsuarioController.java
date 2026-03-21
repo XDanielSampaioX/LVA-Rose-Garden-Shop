@@ -1,6 +1,6 @@
 package com.LVA_Rose_Garden_Shop.controller;
 
-import com.LVA_Rose_Garden_Shop.domain.user.UsuarioDto;
+import com.LVA_Rose_Garden_Shop.dto.user.UsuarioDto;
 import com.LVA_Rose_Garden_Shop.domain.user.UsuarioForm;
 import com.LVA_Rose_Garden_Shop.service.UsuarioService;
 import com.LVA_Rose_Garden_Shop.validator.UsuarioValidator;

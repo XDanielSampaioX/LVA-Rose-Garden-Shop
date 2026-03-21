@@ -16,7 +16,7 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    @Value("${jwt.secret}")
+    @Value("${jwt.secret:ZGVzZXJ0LXJvc2UtZ2FyZGVuLXNob3Ata2V5LTEyMzQ1Njc4OTA=}")
     private String secret;
 
     private Key getKey() {
@@ -29,16 +29,20 @@ public class JwtService {
                 .claim("nome", usuario.getNomeCompleto())
                 .setIssuedAt(new Date())
                 .setExpiration(Date.from(Instant.now().plus(1, ChronoUnit.DAYS)))
-                .signWith(SignatureAlgorithm.HS256, getKey())
+                .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
     public String validarToken(String token) {
         try {
-            return Jwts.parser().setSigningKey(getKey()).parseClaimsJws(token).getBody().getSubject();
+            return Jwts.parserBuilder()
+                    .setSigningKey(getKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();
         } catch (Exception e) {
             return null;
         }
     }
 }
-

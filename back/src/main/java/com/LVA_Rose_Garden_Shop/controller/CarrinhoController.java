@@ -1,6 +1,6 @@
 package com.LVA_Rose_Garden_Shop.controller;
 
-import com.LVA_Rose_Garden_Shop.domain.cart.CarrinhoDto;
+import com.LVA_Rose_Garden_Shop.dto.cart.CarrinhoDto;
 import com.LVA_Rose_Garden_Shop.domain.cart.CarrinhoForm;
 import com.LVA_Rose_Garden_Shop.service.CarrinhoService;
 import lombok.AllArgsConstructor;
@@ -37,7 +37,7 @@ public class CarrinhoController {
     }
 
     @DeleteMapping("/{idUsuario}/limpar")
-    public ResponseEntity<Void> limpar(Long idUsuario) {
+    public ResponseEntity<Void> limpar(@PathVariable Long idUsuario) {
         carrinhoService.limpar(idUsuario);
         return ResponseEntity.noContent().build();
     }

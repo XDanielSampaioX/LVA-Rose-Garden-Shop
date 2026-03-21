@@ -1,6 +1,6 @@
 package com.LVA_Rose_Garden_Shop.service;
 
-import com.LVA_Rose_Garden_Shop.domain.user.UsuarioDto;
+import com.LVA_Rose_Garden_Shop.dto.user.UsuarioDto;
 import com.LVA_Rose_Garden_Shop.domain.user.UsuarioEntity;
 import com.LVA_Rose_Garden_Shop.domain.user.UsuarioForm;
 import com.LVA_Rose_Garden_Shop.mapper.UsuarioMapper;
@@ -23,24 +23,25 @@ public class UsuarioService {
     }
 
     public UsuarioDto criarUsuario(UsuarioForm user) {
-        UsuarioEntity userParaSalvar = usuarioMapper.toEntity(user);
-        userParaSalvar.setPassword(CriptografarSenha.criptografar(user.getPassword()));
+        UsuarioEntity userParaSalvar = UsuarioEntity.criarCadastroLocal(
+                user,
+                CriptografarSenha.criptografar(user.getPassword())
+        );
 
         usuarioRepository.saveAndFlush(userParaSalvar);
         return usuarioMapper.toDto(userParaSalvar);
     }
 
     public UsuarioDto editarUsuario(UsuarioForm user, Long id) {
-        UsuarioDto usuarioExistente = usuarioValidator.verificarExistencia(id);
+        UsuarioEntity usuarioExistente = usuarioValidator.buscarEntidadePorId(id);
+        UsuarioDto usuarioExistenteDto = usuarioMapper.toDto(usuarioExistente);
+        CriptografarSenha.verificarSenha(user.getPassword(), usuarioExistenteDto.getPassword());
 
-        if (!CriptografarSenha.verificarSenha(user.getPassword(), usuarioExistente.getPassword())) {
-            throw new RuntimeException("Senha incorreta " + usuarioExistente.getPassword() + " != " + user.getPassword());
-        }
-
-        UsuarioEntity userParaSalvar = usuarioMapper.toEntity(user);
-        userParaSalvar.setId(id);
-        userParaSalvar.setPassword(CriptografarSenha.criptografar(user.getPassword()));
-        usuarioRepository.saveAndFlush(userParaSalvar);
-        return usuarioMapper.toDto(userParaSalvar);
+        usuarioExistente.atualizarCadastro(
+                user,
+                CriptografarSenha.criptografar(user.getPassword())
+        );
+        usuarioRepository.saveAndFlush(usuarioExistente);
+        return usuarioMapper.toDto(usuarioExistente);
     }
 }

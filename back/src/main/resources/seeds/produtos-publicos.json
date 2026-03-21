@@ -1,0 +1,112 @@
+[
+  {
+    "nome": "Rosa do Deserto VAMPIRA",
+    "descricao": "Variedade de forte apelo ornamental, inspirada em vitrines promocionais de lojas de Fortaleza.",
+    "preco": 49.49,
+    "categoria": "Pre-venda",
+    "estoque": 6,
+    "imagemArquivo": "Vampira.jpg",
+    "imagemMimeType": "image/jpeg",
+    "fonteReferencia": "https://www.rosadosolfortaleza.com.br/",
+    "dataLancamento": "2026-03-20T09:00:00-03:00"
+  },
+  {
+    "nome": "Rosa do Deserto PURPLE BLUE",
+    "descricao": "Flor enxertada com foco em colecionadores, usando referência pública de loja online de Fortaleza.",
+    "preco": 34.99,
+    "categoria": "Pre-venda",
+    "estoque": 8,
+    "imagemArquivo": "Purple_Blue.jpg",
+    "imagemMimeType": "image/jpeg",
+    "fonteReferencia": "https://rosadosolfortaleza.com.br/produtos/rosa-do-deserto-purple-blue-pre-venda-envio-final-de-fevereiro-asp6i/",
+    "dataLancamento": "2026-03-20T09:05:00-03:00"
+  },
+  {
+    "nome": "Rosa do Deserto CANAN 77",
+    "descricao": "Planta pronta entrega, com comunicação comercial baseada em catálogos públicos de Fortaleza.",
+    "preco": 59.99,
+    "categoria": "Pronta entrega",
+    "estoque": 5,
+    "imagemArquivo": "Canan_20.jpg",
+    "imagemMimeType": "image/jpeg",
+    "fonteReferencia": "https://rosadosolfortaleza.com.br/produtos/rosa-do-deserto-canan-77-pronta-entrega/",
+    "dataLancamento": "2026-03-20T09:10:00-03:00"
+  },
+  {
+    "nome": "Rosa do Deserto RUBI RO",
+    "descricao": "Seleção voltada para coleção e presentes, com preço público consultado em catálogo aberto.",
+    "preco": 59.99,
+    "categoria": "Pronta entrega",
+    "estoque": 4,
+    "imagemArquivo": "RUBI_RO.jpg",
+    "imagemMimeType": "image/jpeg",
+    "fonteReferencia": "https://rosadosolfortaleza.com.br/produtos/rosa-do-deserto-rubi-ro1/",
+    "dataLancamento": "2026-03-20T09:15:00-03:00"
+  },
+  {
+    "nome": "Rosa do Deserto FLUORITA",
+    "descricao": "Variedade vibrante para vitrines promocionais, inspirada em ofertas públicas recorrentes.",
+    "preco": 69.99,
+    "categoria": "Pre-venda",
+    "estoque": 7,
+    "imagemArquivo": "Fluorita.jpg",
+    "imagemMimeType": "image/jpeg",
+    "fonteReferencia": "https://www.rosadosolfortaleza.com.br/",
+    "dataLancamento": "2026-03-20T09:20:00-03:00"
+  },
+  {
+    "nome": "Rosa do Deserto SAMBA",
+    "descricao": "Linha de destaque com visual tropical e forte apelo de banner para campanhas sazonais.",
+    "preco": 34.99,
+    "categoria": "Pre-venda",
+    "estoque": 9,
+    "imagemArquivo": "Samba.jpg",
+    "imagemMimeType": "image/jpeg",
+    "fonteReferencia": "https://www.rosadosolfortaleza.com.br/",
+    "dataLancamento": "2026-03-20T09:25:00-03:00"
+  },
+  {
+    "nome": "Rosa do Deserto TROPICAL",
+    "descricao": "Variedade colorida inspirada em vitrines quentes e promocionais de lojas especializadas.",
+    "preco": 49.49,
+    "categoria": "Pre-venda",
+    "estoque": 10,
+    "imagemArquivo": "Tropical.jpg",
+    "imagemMimeType": "image/jpeg",
+    "fonteReferencia": "https://www.rosadosolfortaleza.com.br/",
+    "dataLancamento": "2026-03-20T09:30:00-03:00"
+  },
+  {
+    "nome": "Rosa do Deserto BLACK SWAN II",
+    "descricao": "Peça premium para colecionadores, posicionada como destaque visual em listagens.",
+    "preco": 49.99,
+    "categoria": "Colecionáveis",
+    "estoque": 3,
+    "imagemArquivo": "Black_Swan_II.jpg",
+    "imagemMimeType": "image/jpeg",
+    "fonteReferencia": "https://rosadosolfortaleza.com.br/produtos/roda-do-deserto-pomegranate/",
+    "dataLancamento": "2026-03-20T09:35:00-03:00"
+  },
+  {
+    "nome": "Baby Rosa do Deserto MISS DIOR",
+    "descricao": "Versão baby enxertada, apresentada com linguagem comercial semelhante às lojas de Fortaleza.",
+    "preco": 49.90,
+    "categoria": "Baby",
+    "estoque": 6,
+    "imagemArquivo": "Miss_Dior.jpg",
+    "imagemMimeType": "image/jpeg",
+    "fonteReferencia": "https://rosadodesertofortaleza.com.br/product/baby-rosa-do-deserto-lm4/",
+    "dataLancamento": "2026-03-20T09:40:00-03:00"
+  },
+  {
+    "nome": "Rosa do Deserto CRISTA",
+    "descricao": "Forma ornamental de forte identidade visual, boa para compor a seção de destaques.",
+    "preco": 59.90,
+    "categoria": "Exóticas",
+    "estoque": 2,
+    "imagemArquivo": "Crista.jpg",
+    "imagemMimeType": "image/jpeg",
+    "fonteReferencia": "https://rosadodesertofortaleza.com.br/contact-us/",
+    "dataLancamento": "2026-03-20T09:45:00-03:00"
+  }
+]

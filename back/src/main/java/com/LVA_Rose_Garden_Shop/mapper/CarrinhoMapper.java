@@ -1,48 +1,72 @@
 package com.LVA_Rose_Garden_Shop.mapper;
 
-import com.LVA_Rose_Garden_Shop.domain.cart.CarrinhoDto;
+import com.LVA_Rose_Garden_Shop.dto.cart.CarrinhoDto;
+import com.LVA_Rose_Garden_Shop.dto.product.ProdutoDto;
+import com.LVA_Rose_Garden_Shop.dto.user.UsuarioDto;
 import com.LVA_Rose_Garden_Shop.domain.cart.CarrinhoEntity;
 import com.LVA_Rose_Garden_Shop.domain.cart.CarrinhoForm;
-import com.LVA_Rose_Garden_Shop.domain.product.ProdutoDto;
 import com.LVA_Rose_Garden_Shop.domain.product.ProdutoEntity;
-import com.LVA_Rose_Garden_Shop.domain.user.UsuarioDto;
 import com.LVA_Rose_Garden_Shop.domain.user.UsuarioEntity;
 import com.LVA_Rose_Garden_Shop.validator.ProdutoValidator;
 import com.LVA_Rose_Garden_Shop.validator.UsuarioValidator;
-import org.mapstruct.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring")
-public interface CarrinhoMapper {
+@Component
+@RequiredArgsConstructor
+public class CarrinhoMapper {
 
-    @Mapping(source = "produtoEntity", target = "produtoDto")
-    @Mapping(source = "usuarioEntity", target = "usuarioDto")
-    CarrinhoDto toDto(CarrinhoEntity entity);
+    private final ProdutoMapper produtoMapper;
+    private final UsuarioMapper usuarioMapper;
 
-    @Mapping(target = "produtoEntity", source = "produtoDto")
-    @Mapping(target = "usuarioEntity", source = "usuarioDto")
-    CarrinhoEntity toEntity(CarrinhoDto dto);
+    public CarrinhoDto toDto(CarrinhoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
 
-    @Mapping(target = "produtoEntity", ignore = true)
-    @Mapping(target = "usuarioEntity", ignore = true)
-    CarrinhoEntity toEntity(CarrinhoForm form,
-                            @Context ProdutoValidator validator,
-                            @Context ProdutoMapper mapper,
-                            @Context UsuarioValidator usuarioValidator,
-                            @Context UsuarioMapper usuarioMapper);
+        ProdutoDto produtoDto = entity.getProdutoEntity() == null
+                ? null
+                : produtoMapper.toDto(entity.getProdutoEntity());
 
-    @AfterMapping
-    default void setProdutoEntity(CarrinhoForm form,
-                                  @MappingTarget CarrinhoEntity entity,
-                                  @Context ProdutoValidator produtoValidator,
-                                  @Context ProdutoMapper produtoMapper,
-                                  @Context UsuarioValidator usuarioValidator,
-                                  @Context UsuarioMapper usuarioMapper) {
-        ProdutoDto produtoDto = produtoValidator.verificarExistencia(form.getProdutoId());
-        ProdutoEntity produtoEntity = produtoMapper.toEntity(produtoDto);
-        UsuarioDto usuarioDto = usuarioValidator.verificarExistencia(form.getUsuarioId());
-        UsuarioEntity usuarioEntity = usuarioMapper.toEntity(usuarioDto);
+        UsuarioDto usuarioDto = entity.getUsuarioEntity() == null
+                ? null
+                : usuarioMapper.toDto(entity.getUsuarioEntity());
 
-        entity.setProdutoEntity(produtoEntity);
-        entity.setUsuarioEntity(usuarioEntity);
+        return CarrinhoDto.builder()
+                .id(entity.getId())
+                .produtoDto(produtoDto)
+                .usuarioDto(usuarioDto)
+                .quantidade(entity.getQuantidade())
+                .build();
+    }
+
+    public CarrinhoEntity toEntity(CarrinhoDto dto) {
+        if (dto == null) {
+            return null;
+        }
+
+        CarrinhoEntity carrinho = new CarrinhoEntity();
+        carrinho.setId(dto.getId());
+        carrinho.setQuantidade(dto.getQuantidade());
+
+        if (dto.getProdutoDto() != null) {
+            carrinho.setProdutoEntity(ProdutoEntity.referencia(dto.getProdutoDto().getId()));
+        }
+
+        if (dto.getUsuarioDto() != null) {
+            carrinho.setUsuarioEntity(UsuarioEntity.referencia(dto.getUsuarioDto().getId()));
+        }
+
+        return carrinho;
+    }
+
+    public CarrinhoEntity toEntity(CarrinhoForm form,
+                                   ProdutoValidator produtoValidator,
+                                   UsuarioValidator usuarioValidator) {
+        CarrinhoEntity entity = new CarrinhoEntity();
+        entity.setQuantidade(form.getQuantidade());
+        entity.setProdutoEntity(produtoValidator.buscarEntidadePorId(form.getProdutoId()));
+        entity.setUsuarioEntity(usuarioValidator.buscarEntidadePorId(form.getUsuarioId()));
+        return entity;
     }
 }

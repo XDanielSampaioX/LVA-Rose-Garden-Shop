@@ -1,6 +1,6 @@
 package com.LVA_Rose_Garden_Shop.validator;
 
-import com.LVA_Rose_Garden_Shop.domain.cart.CarrinhoDto;
+import com.LVA_Rose_Garden_Shop.dto.cart.CarrinhoDto;
 import com.LVA_Rose_Garden_Shop.domain.cart.CarrinhoEntity;
 import com.LVA_Rose_Garden_Shop.mapper.CarrinhoMapper;
 import com.LVA_Rose_Garden_Shop.repository.CarrinhoRepository;
