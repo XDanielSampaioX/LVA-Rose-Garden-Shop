@@ -5,7 +5,7 @@ target/
 !**/src/test/**/target/
 
 # Ignorar configurações sensíveis
-resources/*
+back/src/main/resources
 application.properties
 application.yml
 .env
